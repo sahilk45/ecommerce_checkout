@@ -2,104 +2,143 @@
 import { useState } from 'react';
 
 export default function ProductCard({ product, onBuy }) {
-  const [selectedVariant, setSelectedVariant] = useState(product.variant || 'Red');
+  const [selectedVariant, setSelectedVariant] = useState(product.variant || 'Classic Red');
   const [quantity, setQuantity] = useState(1);
 
-  const variants = ['Red', 'Blue', 'Black', 'White', 'Green'];
-  
   const handleBuyNow = () => {
     onBuy(product, selectedVariant, quantity);
   };
 
-  const getVariantColor = (variant) => {
-    const colors = {
-      'Red': 'bg-red-500',
-      'Blue': 'bg-blue-500',
-      'Black': 'bg-black',
-      'White': 'bg-white border-2 border-gray-300',
-      'Green': 'bg-green-500'
+  // Get color class based on variant name
+  const getVariantColorClass = (variant) => {
+    const colorMap = {
+      'Classic Red': 'bg-red-500',
+      'Ocean Blue': 'bg-blue-500',
+      'Midnight Black': 'bg-gray-900',
+      'Pure White': 'bg-gray-100 border border-gray-300',
+      'Forest Green': 'bg-green-600',
+      'Vintage Navy': 'bg-blue-900',
+      'Bubblegum Pink': 'bg-pink-400',
+      'Sunshine Yellow': 'bg-yellow-400',
+      'Cream White': 'bg-yellow-100 border border-gray-300',
+      'Royal Purple': 'bg-purple-600',
+      'Charcoal Grey': 'bg-gray-600',
+      'Premium Black Leather': 'bg-gray-900',
+      'Electric Orange': 'bg-orange-500',
+      'Mint Fresh': 'bg-green-300',
+      'Vintage Brown Leather': 'bg-yellow-800',
+      'Wine Burgundy': 'bg-red-800'
     };
-    return colors[variant] || 'bg-gray-500';
+    return colorMap[variant] || 'bg-gray-500';
   };
 
+  // Get stock status
+  const getStockStatus = () => {
+    if (product.inventory > 20) return { text: 'In Stock', color: 'text-green-400' };
+    if (product.inventory > 5) return { text: 'Low Stock', color: 'text-yellow-400' };
+    if (product.inventory > 0) return { text: 'Very Low Stock', color: 'text-orange-400' };
+    return { text: 'Out of Stock', color: 'text-red-400' };
+  };
+
+  const stockStatus = getStockStatus();
+
   return (
-    <div className="glass-card-enhanced p-6 rounded-2xl shadow-2xl max-w-sm mx-auto group hover:shadow-3xl transition-all duration-500">
-      {/* Product Image */}
-      <div className="relative mb-6 overflow-hidden rounded-xl">
-        <img 
-          src="/shoe.png" 
-          alt={product.title || "Product"} 
-          className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500" 
-        />
-        <div className="absolute top-2 right-2 bg-green-500 text-white px-2 py-1 rounded-full text-sm font-bold">
-          ${product.price}
+    <div className="glass-card-enhanced p-6 rounded-2xl shadow-2xl hover:shadow-3xl transition-all duration-300 group">
+      {/* Product Image Placeholder */}
+      <div className="relative mb-6 overflow-hidden rounded-xl bg-gradient-to-br from-gray-800 to-gray-900 h-64 flex items-center justify-center group-hover:scale-105 transition-transform duration-300">
+        <div className="text-6xl animate-float">👟</div>
+        <div className="absolute top-3 right-3 bg-black/50 backdrop-blur-sm rounded-full px-3 py-1">
+          <span className={`text-sm font-medium ${stockStatus.color}`}>
+            {stockStatus.text}
+          </span>
         </div>
+        {product.inventory <= 5 && product.inventory > 0 && (
+          <div className="absolute bottom-3 left-3 bg-yellow-500/90 text-black text-xs font-bold px-2 py-1 rounded-full">
+            Only {product.inventory} left!
+          </div>
+        )}
       </div>
 
       {/* Product Info */}
       <div className="space-y-4">
-        <h2 className="text-xl font-bold text-white group-hover:text-blue-300 transition-colors">
-          {product.title || "Product Title"}
-        </h2>
-        
-        <p className="text-gray-300 text-sm leading-relaxed">
-          {product.description || "Amazing product with great features"}
-        </p>
-
-        {/* Variant Selector */}
         <div>
-          <label className="block text-gray-400 mb-2 font-medium">Color Variant</label>
-          <div className="flex flex-wrap gap-2 mb-2">
-            {variants.map((variant) => (
-              <button
-                key={variant}
-                onClick={() => setSelectedVariant(variant)}
-                className={`w-8 h-8 rounded-full border-2 transition-all duration-200 ${
-                  selectedVariant === variant 
-                    ? 'border-blue-400 ring-2 ring-blue-400 ring-opacity-50' 
-                    : 'border-gray-600 hover:border-gray-400'
-                } ${getVariantColor(variant)}`}
-                title={variant}
-              />
-            ))}
+          <h3 className="text-xl font-bold text-white mb-2 group-hover:text-blue-300 transition-colors">
+            {product.title}
+          </h3>
+          <p className="text-gray-300 text-sm leading-relaxed">
+            {product.description}
+          </p>
+        </div>
+
+        {/* Price */}
+        <div className="flex items-center justify-between">
+          <span className="text-2xl font-bold text-green-400">
+            ${product.price.toFixed(2)}
+          </span>
+          <div className="flex items-center space-x-2">
+            <div className={`w-4 h-4 rounded-full ${getVariantColorClass(product.variant)}`}></div>
+            <span className="text-gray-400 text-sm">{product.variant}</span>
           </div>
-          <p className="text-sm text-blue-300 font-medium">Selected: {selectedVariant}</p>
+        </div>
+
+        {/* Variant Display (showing current variant) */}
+        <div className="space-y-2">
+          <label className="text-sm font-medium text-gray-300">
+            Selected Variant:
+          </label>
+          <div className="flex items-center space-x-2 p-2 bg-gray-800/50 rounded-lg">
+            <div className={`w-3 h-3 rounded-full ${getVariantColorClass(selectedVariant)}`}></div>
+            <span className="text-white text-sm">{selectedVariant}</span>
+          </div>
         </div>
 
         {/* Quantity Selector */}
-        <div>
-          <label className="block text-gray-400 mb-2 font-medium">Quantity</label>
+        <div className="space-y-2">
+          <label className="text-sm font-medium text-gray-300">
+            Quantity:
+          </label>
           <div className="flex items-center space-x-3">
             <button
               onClick={() => setQuantity(Math.max(1, quantity - 1))}
-              className="w-10 h-10 bg-gray-700 hover:bg-gray-600 text-white rounded-full flex items-center justify-center font-bold transition-colors"
+              className="w-8 h-8 rounded-full bg-gray-700 hover:bg-gray-600 text-white flex items-center justify-center transition-colors"
+              disabled={quantity <= 1}
             >
-              -
+              −
             </button>
-            <span className="text-white font-bold text-lg min-w-[2rem] text-center">{quantity}</span>
+            <span className="w-8 text-center text-white font-semibold">
+              {quantity}
+            </span>
             <button
-              onClick={() => setQuantity(quantity + 1)}
-              className="w-10 h-10 bg-gray-700 hover:bg-gray-600 text-white rounded-full flex items-center justify-center font-bold transition-colors"
+              onClick={() => setQuantity(Math.min(product.inventory, quantity + 1))}
+              className="w-8 h-8 rounded-full bg-gray-700 hover:bg-gray-600 text-white flex items-center justify-center transition-colors"
+              disabled={quantity >= product.inventory}
             >
               +
             </button>
           </div>
         </div>
 
-        {/* Price Display */}
-        <div className="bg-gradient-to-r from-green-500 to-blue-500 p-3 rounded-lg">
-          <div className="flex justify-between items-center text-white">
-            <span className="font-medium">Total:</span>
-            <span className="text-xl font-bold">${(product.price * quantity).toFixed(2)}</span>
+        {/* Total Price */}
+        <div className="bg-gray-800/50 rounded-lg p-3">
+          <div className="flex justify-between items-center">
+            <span className="text-gray-300">Total:</span>
+            <span className="text-xl font-bold text-green-400">
+              ${(product.price * quantity).toFixed(2)}
+            </span>
           </div>
         </div>
 
-        {/* Buy Button */}
+        {/* Buy Now Button */}
         <button
           onClick={handleBuyNow}
-          className="w-full bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white font-bold py-3 px-6 rounded-xl transition-all duration-300 transform hover:scale-105 hover:shadow-lg focus:outline-none focus:ring-4 focus:ring-purple-500 focus:ring-opacity-50"
+          disabled={product.inventory === 0}
+          className={`w-full py-3 px-6 rounded-xl font-bold text-white transition-all duration-300 transform hover:scale-105 ${
+            product.inventory === 0
+              ? 'bg-gray-600 cursor-not-allowed'
+              : 'bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 hover:shadow-lg animate-pulse-glow'
+          }`}
         >
-          🛒 Buy Now
+          {product.inventory === 0 ? '😔 Out of Stock' : '🛒 Buy Now'}
         </button>
       </div>
     </div>

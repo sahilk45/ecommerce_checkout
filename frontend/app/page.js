@@ -12,7 +12,12 @@ export default function Home() {
     fetch('http://localhost:4000/api/products')
       .then((res) => res.json())
       .then((data) => {
-        setProducts(data);
+        // Ensure products have valid price values
+        const validatedProducts = data.map(product => ({
+          ...product,
+          price: typeof product.price === 'number' ? product.price : parseFloat(product.price) || 0
+        }));
+        setProducts(validatedProducts);
         setLoading(false);
       })
       .catch((error) => {
@@ -22,12 +27,15 @@ export default function Home() {
   }, []);
 
   const handleBuy = (product, selectedVariant, quantity) => {
+    // Ensure price is a valid number before converting to string
+    const validPrice = typeof product.price === 'number' ? product.price : parseFloat(product.price) || 0;
+    
     const params = new URLSearchParams({
-      productId: product.id,
-      variant: selectedVariant,
+      productId: product.id || '',
+      variant: selectedVariant || '',
       quantity: quantity.toString(),
-      title: product.title,
-      price: product.price.toString()
+      title: product.title || '',
+      price: validPrice.toString()
     });
     router.push(`/checkout?${params.toString()}`);
   };
