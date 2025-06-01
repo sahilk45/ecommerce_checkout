@@ -5,6 +5,12 @@ A fully functional 3-page eCommerce checkout simulation app built using **Next.j
 
 ---
 
+## 📸 Screenshots
+
+> https://drive.google.com/drive/folders/103myQCGg5ixWAXnKD4cxOPuZXsG9NWq4?usp=sharing
+
+---
+
 ## ✨ Features
 
 - 🖼️ Stunning UI with Tailwind CSS + Glassmorphism
