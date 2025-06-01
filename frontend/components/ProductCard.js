@@ -7,22 +7,14 @@ export default function ProductCard({ product, onBuy }) {
 
   // Available color options for Converse shoes
   const colorOptions = [
-    { name: 'Classic Red', hex: '#DC2626', image: '/images/red-shoe.jpg' },
-    { name: 'Ocean Blue', hex: '#2563EB', image: '/images/blue-shoe.jpg' },
-    { name: 'Midnight Black', hex: '#1F2937', image: '/images/black-shoe.jpg' },
-    { name: 'Pure White', hex: '#F9FAFB', image: '/images/white-shoe.jpg' },
-    { name: 'Forest Green', hex: '#059669', image: '/images/green-shoe.jpg' },
-    { name: 'Vintage Navy', hex: '#1E3A8A', image: '/images/navy-shoe.jpg' },
-    { name: 'Bubblegum Pink', hex: '#EC4899', image: '/images/pink-shoe.jpg' },
-    { name: 'Sunshine Yellow', hex: '#EAB308', image: '/images/yellow-shoe.jpg' },
-    { name: 'Cream White', hex: '#FEF3C7', image: '/images/cream-shoe.jpg' },
-    { name: 'Royal Purple', hex: '#7C3AED', image: '/images/purple-shoe.jpg' },
-    { name: 'Charcoal Grey', hex: '#6B7280', image: '/images/grey-shoe.jpg' },
-    { name: 'Premium Black Leather', hex: '#111827', image: '/images/leather-black-shoe.jpg' },
-    { name: 'Electric Orange', hex: '#EA580C', image: '/images/orange-shoe.jpg' },
-    { name: 'Mint Fresh', hex: '#10B981', image: '/images/mint-shoe.jpg' },
-    { name: 'Vintage Brown Leather', hex: '#92400E', image: '/images/brown-leather-shoe.jpg' },
-    { name: 'Wine Burgundy', hex: '#991B1B', image: '/images/burgundy-shoe.jpg' }
+    { name: 'Classic Red', hex: '#DC2626' },
+    { name: 'Ocean Blue', hex: '#2563EB' },
+    { name: 'Midnight Black', hex: '#1F2937' },
+    { name: 'Pure White', hex: '#F9FAFB' },
+    { name: 'Forest Green', hex: '#059669' },
+    { name: 'Vintage Navy', hex: '#1E3A8A' },
+    { name: 'Bubblegum Pink', hex: '#EC4899' },
+    { name: 'Cream White', hex: '#FEF3C7' }
   ];
 
   const handleBuyNow = () => {
@@ -47,7 +39,7 @@ export default function ProductCard({ product, onBuy }) {
       {/* Product Image */}
       <div className="relative h-64 bg-gray-100 overflow-hidden">
         <img 
-          src={currentColor.image} 
+          src={product.image_url || `https://images.unsplash.com/photo-1549298916-b41d501d3772?w=400&h=300&fit=crop&auto=format`} 
           alt={`${product.title} - ${selectedVariant}`}
           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
           onError={(e) => {
@@ -98,7 +90,7 @@ export default function ProductCard({ product, onBuy }) {
             Choose Color:
           </label>
           <div className="grid grid-cols-4 gap-2">
-            {colorOptions.slice(0, 8).map((color) => (
+            {colorOptions.map((color) => (
               <button
                 key={color.name}
                 onClick={() => setSelectedVariant(color.name)}
@@ -120,9 +112,6 @@ export default function ProductCard({ product, onBuy }) {
               </button>
             ))}
           </div>
-          {colorOptions.length > 8 && (
-            <p className="text-xs text-gray-500">+{colorOptions.length - 8} more colors available</p>
-          )}
         </div>
 
         {/* Quantity Selector */}

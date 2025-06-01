@@ -23,7 +23,7 @@ export default function CheckoutForm({ customerForm, cardForm, handleCustomerCha
                 placeholder="Enter your full name" 
                 value={customerForm.name}
                 onChange={handleCustomerChange} 
-                className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors ${
+                className={`w-full px-4 text-black py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors ${
                   errors.name ? 'border-red-500 bg-red-50' : 'border-gray-300'
                 }`}
               />
@@ -40,7 +40,7 @@ export default function CheckoutForm({ customerForm, cardForm, handleCustomerCha
                 placeholder="your@email.com" 
                 value={customerForm.email}
                 onChange={handleCustomerChange} 
-                className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors ${
+                className={`w-full px-4 text-black py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors ${
                   errors.email ? 'border-red-500 bg-red-50' : 'border-gray-300'
                 }`}
               />
@@ -53,10 +53,10 @@ export default function CheckoutForm({ customerForm, cardForm, handleCustomerCha
               </label>
               <input 
                 name="phone" 
-                placeholder="(555) 123-4567" 
+                placeholder="1234567890 " 
                 value={customerForm.phone}
                 onChange={handleCustomerChange} 
-                className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors ${
+                className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors text-black ${
                   errors.phone ? 'border-red-500 bg-red-50' : 'border-gray-300'
                 }`}
               />
@@ -72,7 +72,7 @@ export default function CheckoutForm({ customerForm, cardForm, handleCustomerCha
                 placeholder="123 Main Street, Apt 4B" 
                 value={customerForm.address}
                 onChange={handleCustomerChange} 
-                className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors ${
+                className={`w-full px-4 py-3 text-black border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors ${
                   errors.address ? 'border-red-500 bg-red-50' : 'border-gray-300'
                 }`}
               />
@@ -88,7 +88,7 @@ export default function CheckoutForm({ customerForm, cardForm, handleCustomerCha
                 placeholder="New York" 
                 value={customerForm.city}
                 onChange={handleCustomerChange} 
-                className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors ${
+                className={`w-full px-4 py-3 text-black border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors ${
                   errors.city ? 'border-red-500 bg-red-50' : 'border-gray-300'
                 }`}
               />
@@ -104,7 +104,7 @@ export default function CheckoutForm({ customerForm, cardForm, handleCustomerCha
                 placeholder="NY" 
                 value={customerForm.state}
                 onChange={handleCustomerChange} 
-                className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors ${
+                className={`w-full px-4 text-black py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors ${
                   errors.state ? 'border-red-500 bg-red-50' : 'border-gray-300'
                 }`}
               />
@@ -120,7 +120,7 @@ export default function CheckoutForm({ customerForm, cardForm, handleCustomerCha
                 placeholder="10001" 
                 value={customerForm.zip}
                 onChange={handleCustomerChange} 
-                className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors ${
+                className={`w-full px-4 py-3 text-black border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors ${
                   errors.zip ? 'border-red-500 bg-red-50' : 'border-gray-300'
                 }`}
               />
@@ -151,7 +151,7 @@ export default function CheckoutForm({ customerForm, cardForm, handleCustomerCha
               placeholder="1234 5678 9012 3456" 
               value={cardForm.number}
               onChange={handleCardChange} 
-              className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors ${
+              className={`w-full px-4 py-3 text-black border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors ${
                 errors.number ? 'border-red-500 bg-red-50' : 'border-gray-300'
               }`}
               maxLength="19"
@@ -169,7 +169,7 @@ export default function CheckoutForm({ customerForm, cardForm, handleCustomerCha
                 placeholder="MM/YY" 
                 value={cardForm.expiry}
                 onChange={handleCardChange} 
-                className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors ${
+                className={`w-full px-4 py-3 text-black border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors ${
                   errors.expiry ? 'border-red-500 bg-red-50' : 'border-gray-300'
                 }`}
                 maxLength="5"
@@ -186,7 +186,7 @@ export default function CheckoutForm({ customerForm, cardForm, handleCustomerCha
                 placeholder="123" 
                 value={cardForm.cvv}
                 onChange={handleCardChange} 
-                className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors ${
+                className={`w-full px-4 text-black py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors ${
                   errors.cvv ? 'border-red-500 bg-red-50' : 'border-gray-300'
                 }`}
                 maxLength="3"
@@ -209,11 +209,11 @@ export default function CheckoutForm({ customerForm, cardForm, handleCustomerCha
               name="simulationCode" 
               value={cardForm.simulationCode}
               onChange={handleCardChange} 
-              className="w-full px-4 py-3 border border-yellow-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 bg-white"
+              className="w-full px-4 py-3 border text-black border-yellow-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 bg-white"
             >
-              <option value="1">✅ Successful Payment</option>
-              <option value="2">❌ Payment Declined</option>
-              <option value="3">⚠️ Processing Error</option>
+              <option value="1" className="text-black">✅ Successful Payment</option>
+              <option value="2" className="text-black">❌ Payment Declined</option>
+              <option value="3" className="text-black">⚠️ Processing Error</option>
             </select>
             <p className="text-xs text-yellow-700 mt-1">
               This is for testing purposes only. In production, this would be handled by your payment processor.
